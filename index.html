@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Quiz Challenge</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <nav>
+    <a href="#high-scores" id="high-scores">View Highscores</a>
+    <div class="time"></div>
+  </nav>
+  <div id="start-container">
+    <div id="start-header"></div>
+    <div id="start-description"></div>
+    <button id="start-quiz"></button>
+  </div>
+  <div id="quiz-container">
+    <div id="question"></div>
+
+    <button id="btnA" onclick="checkAnswer('A')">A<span id="choiceA"></span></button>
+    <button id="btnB" onclick="checkAnswer('B')">B<span id="choiceB"></span></button>
+    <button id="btnC" onclick="checkAnswer('C')">C<span id="choiceC"></span></button>
+    <button id="btnD" onclick="checkAnswer('D')">D<span id="choiceD"></span></button>
+    <br>
+    <div id="multiple-choice-container"></div>
+    <br>
+    <div id="result"></div>
+  </div>
+  <div id="high-scores-container">
+    <h3 id="high-scores"></h3>
+    <ul class="list-group" id="high-scores-list"></ul>
+    <button type="button" class="btn btn-primary btn-sm" onClick="storeScore()">Go Back</button>
+    <button type="submit" class="btn btn-primary btn-sm" onClick="clearHighScores()">Clear High Scores</button>
+  </div>
+  <div class="modal fade" id="enter-initials-modal" tabindex="-1" aria-labelledby="enter-initials-modal-label" aria-modal="true" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">You have reached the end of the quiz!</h5>
+        </div>
+        <div class="modal-body">
+          <div class="high-scores-container">
+            <form class="form-inline">
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="userInitials" class="sr-only">Enter Your Initials</label>
+                <input type="text" class="form-control" id="userInitials" placeholder="Enter Your Initials">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" onClick="storeScore()">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
+
+  <!--
+  <div id="result-container">
+    <h3></h3>
+    <form id="enter-initials">
+      <input type="text" placeholder="Enter Your Initials" id="initials" />
+    </form>
+    <div id=""></div>
+  </div>
+  !-->
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
