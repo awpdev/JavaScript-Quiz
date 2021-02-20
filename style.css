@@ -6,23 +6,20 @@
 
 body {
   font-family: 'Heebo', sans-serif;
-}
-
-h2 {
-  text-align: center;
-}
-
-nav .time {
-  text-align: right;
+  background-color: rgb(177, 123, 172);
+  font-size: 18px;
 }
 /*
-#btnA, #btnB, #btnC, #btnD {
-  
-  background-color: purple;
-  color: white; 
+nav .time, #questions {
+  font-size: 18px;
 } */
 
-#btnA:hover, #btnB:hover, #btnC:hover, #btnD:hover {
+#btn-A, #btn-B, #btn-C, #btn-D, #start-quiz-button, #go-back-button, #clear-scores-button, #save-initials-button {
+  background-color: purple;
+  color: white; 
+}
+
+#btn-A:hover, #btn-B:hover, #btn-C:hover, #btn-D:hover {
   cursor: pointer;
   /*background-color: #be70be; */
 }
@@ -32,4 +29,8 @@ nav .time {
 #result,
 #result-container {
   display: none;
+}
+
+#view-high-scores-nav-button {
+  color: black;
 }

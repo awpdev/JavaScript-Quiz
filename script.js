@@ -41,7 +41,7 @@ const questions = [{
 }, {
   question: "The syntax of capture events method for document object is _____.",
   choices: ['a. captureEvents()', 'b. captureEvents(args eventType)', 'c. captureEvents(eventType)', 'd. captureEvents(eventVal)'],
-  correctAnswer: '4'
+  correctAnswer: '3'
 }, {
   question: "RxJS stands for _______ Extensions for JavaScript",
   choices: ['a. Recursive', 'b. Relational', 'c. Reactive', 'd. Registration'],
@@ -84,27 +84,26 @@ const questions = [{
   const clearScoresBtnEl = document.querySelector('#clear-scores-button');
 
   const highScoresContainerEl = document.querySelector('#high-scores-container');
-  //const startScreenEl = document.
   const initialsInputEl = document.querySelector('#initials');
   const highScoresListEl = document.querySelector('#high-scores-list');
 
-  // modal element for result/submit initials screen
   const resultContainerEl = document.querySelector('#result-container');
-  const backdropEl = document.querySelector('#backdrop');
+
 
   let secondsLeft = 75;
-  //let quizTime = false; // a flag if quiz session is active
   let questionCt; // current number of questions in session
-  const MAX_QUESTIONS = 10;
-  let score;
-  let scoreArr = [];
+  const MAX_QUESTIONS = 10; // max number of questions per session
+  let lastScore;
+  //let scores = [];
   let randomNum;
+
+  const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
   function setTime() {
     let timerInterval = setInterval(function() {
       secondsLeft--;
       timeEl.textContent = 'Time Remaining: ' + secondsLeft;
-      if (secondsLeft === 0 || questionCt === MAX_QUESTIONS) {
+      if (secondsLeft <= 0 || questionCt === MAX_QUESTIONS) {
         clearInterval(timerInterval);
         endQuiz();
       }
@@ -146,7 +145,7 @@ const questions = [{
 
   function endQuiz() {
     scoreEl.textContent = secondsLeft;
-    score = secondsLeft;
+    lastScore = secondsLeft;
     quizContainerEl.style.display = 'none';
     resultContainerEl.style.display = 'block';
   }
@@ -174,20 +173,56 @@ const questions = [{
     askQuestion(questionCt);
   }
   
-/*
+
   function displayScores() {
-    quizContainerEl.style.display = 'none';
     startContainerEl.style.display = 'none';
-    highScoresContainerEl.style.display = 'block';
-  }
-*/
-  function saveInitials() {
+    quizContainerEl.style.display = 'none';
     resultContainerEl.style.display = 'none';
     highScoresContainerEl.style.display = 'block';
+
+    highScoresListEl.innerHTML = "";
+    if (highScores) {
+      for (let i = 0; i < highScores.length; i++) {
+        let scr = document.createElement('li');
+        scr.textContent = highScores[i].initials + ' - ' + highScores[i].score;
+        highScoresListEl.append(scr);
+      }
+    }
   }
 
+  function saveInitials(event) {
+    event.preventDefault();
+    resultContainerEl.style.display = 'none';
+    highScoresContainerEl.style.display = 'block';
 
-  // viewHighScores.addEventListener("click", displayScores);
+    let inits = userInitialsInputEl.value.split('');
+    inits.splice(3);
+    inits = inits.join('');
+    console.log(inits);
+    //inits = inits.;
+    console.log(questions.length);
+
+    const score = {
+      initials: inits,
+      score: lastScore
+    };
+    //console.log(lastScore);
+    highScores.push(score);
+    highScores.sort((a,b) => b.score - a.score);
+    highScores.splice(5);
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+
+    displayScores();
+
+    console.log(highScores);
+  }
+
+  function clearScores() {
+    window.localStorage.clear();
+    highScoresListEl.innerHTML = "";
+  }
+
+  //viewHighScores.addEventListener("click", displayScores);
 
 
 /*
@@ -216,3 +251,11 @@ const questions = [{
   goBackBtnEl.addEventListener('click', startScreen);
 
   saveInitialsBtnEl.addEventListener('click', saveInitials);
+
+  userInitialsInputEl.addEventListener('keyup', function() {
+    saveInitialsBtnEl.disabled = !userInitialsInputEl.value;
+  });
+
+  clearScoresBtnEl.addEventListener('click', clearScores);
+
+  viewScoresBtnNavEl.addEventListener('click', displayScores)
