@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+}
+
+h2 {
+  text-align: center;
+}
+
+nav .time {
+  text-align: right;
+}
+/*
+#btnA, #btnB, #btnC, #btnD {
+  
+  background-color: purple;
+  color: white; 
+} */
+
+#btnA:hover, #btnB:hover, #btnC:hover, #btnD:hover {
+  cursor: pointer;
+  /*background-color: #be70be; */
+}
+
+#quiz-container,
+#high-scores-container,
+#result,
+#result-container {
+  display: none;
+}
